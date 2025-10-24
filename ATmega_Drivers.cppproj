@@ -131,6 +131,9 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+      <Value>../include</Value>
+      <Value>../src</Value>
+      <Value>../examples</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcccpp.compiler.optimization.level>
@@ -153,7 +156,19 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="main.cpp">
+    <Folder Include="include" />
+    <Folder Include="examples" />
+    <Folder Include="src" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="examples\main.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\gpio.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\gpio.cpp">
+
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
