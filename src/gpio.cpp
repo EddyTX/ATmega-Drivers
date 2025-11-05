@@ -1,20 +1,8 @@
-#include <avr/io.h>
-#include "gpio.h"
+#include "gpio.hpp"
 
-
-GpioStatus GpioDriver::SetPinDirection(volatile uint8_t* ddr, uint8_t pin, PinDirection dir)
+void GpioDriver::SetPinDirection(volatile uint8_t *ddr, uint8_t pin, PinDirection direction)
 {
-	if (ddr == nullptr)
-	{
-		return GpioStatus::NULL_POINTER;
-	}
-
-	if (pin > MAX_PINS_PER_PORT)
-	{
-		return GpioStatus::INVALID_PIN;
-	}
-
-	if (PinDirection::OUTPUT == dir)
+	if(direction == PinDirection::OUTPUT)
 	{
 		*ddr |= (1 << pin);
 	}
@@ -22,23 +10,11 @@ GpioStatus GpioDriver::SetPinDirection(volatile uint8_t* ddr, uint8_t pin, PinDi
 	{
 		*ddr &= ~(1 << pin);
 	}
-
-	return GpioStatus::OK;
 }
 
-GpioStatus GpioDriver::SetPinLevel(volatile uint8_t* port, uint8_t pin, PinLevel level)
+void GpioDriver::SetPinLevel(volatile uint8_t *port, uint8_t pin, PinLevel level)
 {
-	if (port == nullptr)
-	{
-		return GpioStatus::NULL_POINTER;
-	}
-
-	if (pin > MAX_PINS_PER_PORT)
-	{
-		return GpioStatus::INVALID_PIN;
-	}
-
-	if (PinLevel::HIGH == level)
+	if(level == PinLevel::HIGH)
 	{
 		*port |= (1 << pin);
 	}
@@ -46,30 +22,22 @@ GpioStatus GpioDriver::SetPinLevel(volatile uint8_t* port, uint8_t pin, PinLevel
 	{
 		*port &= ~(1 << pin);
 	}
-
-	return GpioStatus::OK;
 }
 
-GpioStatus GpioDriver::ReadPinLevel(volatile uint8_t* pinReg, uint8_t pin, PinLevel& level)
+void GpioDriver::TogglePin(volatile uint8_t *port, uint8_t pin)
 {
-	if (pinReg == nullptr)
-	{
-		return GpioStatus::NULL_POINTER;
-	}
+	*port ^= (1 << pin);
+}
 
-	if (pin > MAX_PINS_PER_PORT)
-	{
-		return GpioStatus::INVALID_PIN;
-	}
-
+PinLevel GpioDriver::ReadPin(volatile uint8_t *pinReg, uint8_t pin)
+{
 	if (*pinReg & (1 << pin))
 	{
-		level = PinLevel::HIGH;
+		return PinLevel::HIGH;
 	}
 	else
 	{
-		level = PinLevel::LOW;
+		return PinLevel::LOW;
 	}
-
-	return GpioStatus::OK;
 }
+
