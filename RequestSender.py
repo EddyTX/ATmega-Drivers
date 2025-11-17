@@ -3,18 +3,18 @@ import time
 
 # Configurare port serial
 ser = serial.Serial(
-    port='COM3',       # schimbă cu portul tău
+    port='COM3',
     baudrate=9600,
     timeout=1
 )
 
-time.sleep(2)  # așteptare să se inițializeze Arduino/ATmega
+time.sleep(2)
 
-# Trimite cererea HTTP-like
+
 request = "GET /msg\r\n"
 ser.write(request.encode())
 
-# Citește răspunsul
+
 response = ""
 while True:
     line = ser.readline().decode('utf-8', errors='ignore')
