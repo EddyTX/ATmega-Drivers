@@ -1,0 +1,17 @@
+#pragma once
+
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
+#define SYSTEM_TICK_MS 1UL
+
+#define UART_RX_BUFFER_SIZE 128
+#define UART_TX_BUFFER_SIZE 128
+
+#define TIMER_MAX_COUNT 3
+
+#define HTTP_REQUEST_BUFFER_SIZE 128
+
+// Constanta pentru num?rul maxim de handlere (ex: Gpio, Timer, Adc)
+#define MAX_HANDLERS 5
