@@ -18,8 +18,8 @@ enum TimerStatus : int32_t
 class Timer
 {
 	public:
-	Timer(); // <<< AD?UGAT: Constructorul implicit, f?r? argumente
-	Timer(uint32_t interval); // S-a eliminat `= 0` pentru a simplifica
+	Timer(); 
+	Timer(uint32_t interval); 
 	void SetInterval(uint32_t interval);
 	uint32_t GetInterval() const;
 	void SetElapsed(uint32_t elapsed);
@@ -55,4 +55,4 @@ class TimerDriver
 };
  extern TimerDriver timerDriver;
 
-#endif /* ATMEGADRIVERS_TIMER_HPP_INCLUDED */
+#endif 

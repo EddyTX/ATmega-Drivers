@@ -7,7 +7,6 @@ TimerHandler::TimerHandler(ICommChannel& comm, TimerDriver& timerDriver)
 {
 }
 
-// Func?ie ajut?toare (este duplicat?, o po?i muta într-o clas? HttpResponder)
 void TimerHandler::SendResponse(const char* code, const char* contentType, const char* body)
 {
 	char response[128];
@@ -27,27 +26,26 @@ void TimerHandler::SendResponse(const char* code, const char* contentType, const
 
 bool TimerHandler::Handle(const char* method, const char* path)
 {
-	// Acest handler gestioneaz? doar metoda GET
+	
 	if (strcmp(method, "GET") != 0)
 	{
 		return false;
 	}
 
-	// Verific?m dac? este pentru noi
 	if (strcmp(path, "/timer/elapsed") == 0)
 	{
 		uint32_t seconds = timerDriver_.GetSystemSeconds();
 		char body[20];
 		snprintf(body, sizeof(body), "%lu", seconds);
 		SendResponse("200 OK", "text/plain", body);
-		return true; // Am gestionat cererea
+		return true; 
 	}
 	
 	if (strcmp(path, "/msg") == 0)
 	{
 		SendResponse("200 OK", "text/html", "Hello World Modular");
-		return true; // Am gestionat cererea
+		return true; 
 	}
 	
-	return false; // Nu este o cerere pentru noi
+	return false; 
 }

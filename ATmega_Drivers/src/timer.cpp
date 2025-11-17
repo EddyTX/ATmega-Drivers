@@ -3,26 +3,17 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-// Variabile globale definite o singur? dat?
+
 static volatile uint32_t g_systemTicks = 0;
 TimerDriver timerDriver;
 
-// ====================================================================
-// ISR (Interrupt Service Routine) pentru Timer2
-// Aceasta se apeleaz? la fiecare 1ms (sau SYSTEM_TICK_MS)
-// ====================================================================
+
 ISR(TIMER2_COMPA_vect)
 {
 	g_systemTicks++;
 }
 
-// ====================================================================
-// CLASA TIMER (Implementarea func?iilor)
-// Acesta este blocul de cod care lipsea
-// ====================================================================
 
-// Constructorul implicit (pentru ini?ializarea array-ului din TimerDriver)
-// Se folose?te de argumentul implicit din timer.hpp (interval = 0)
 Timer::Timer(){}
 Timer::Timer(uint32_t interval)
 {
@@ -72,15 +63,10 @@ bool Timer::HasElapsed()
 }
 
 
-// ====================================================================
-// CLASA TIMERDRIVER (Implementarea func?iilor)
-// ====================================================================
-
 uint32_t TimerDriver::GetSystemSeconds() const
 {
 	uint32_t ticks;
 	
-	// Sec?iune critic? (citire atomic? a variabilei de 32 de bi?i)
 	uint8_t sreg = SREG;
 	cli();
 	ticks = g_systemTicks;
@@ -91,26 +77,25 @@ uint32_t TimerDriver::GetSystemSeconds() const
 
 TimerDriver::TimerDriver()
 {
-	// Ini?ializarea array-ului de callback-uri
+	
 	for (uint8_t i = 0; i < TIMER_MAX_COUNT; i++)
 	{
 		callbacks[i] = nullptr;
 	}
 
-	// Ini?ializarea Timer2 pentru 1ms tick (16MHz, Prescaler 64)
-	// Presupunând c? SYSTEM_TICK_MS = 1UL
-	OCR2A = 249; // (16000000 / 64 / 1000) - 1 = 249
-	TCCR2A = (1 << WGM21); // CTC Mode
-	TCCR2B = (1 << CS21) | (1 << CS20); // Prescaler 64
-	TIMSK2 = (1 << OCIE2A); // Activeaz? întreruperea pe Compare Match A
-	sei(); // Activeaz? întreruperile globale
+	
+	OCR2A = 249; 
+	TCCR2A = (1 << WGM21); 
+	TCCR2B = (1 << CS21) | (1 << CS20); 
+	TIMSK2 = (1 << OCIE2A); 
+	sei(); 
 }
 
 int8_t TimerDriver::CreateTimer(uint32_t intervalMs)
 {
 	for (uint8_t i = 0; i < TIMER_MAX_COUNT; i++)
 	{
-		if (timers[i].GetInterval() == 0) // Caut? un timer neutilizat (interval = 0)
+		if (timers[i].GetInterval() == 0) 
 		{
 			timers[i].SetInterval(intervalMs);
 			timers[i].SetElapsed(0);

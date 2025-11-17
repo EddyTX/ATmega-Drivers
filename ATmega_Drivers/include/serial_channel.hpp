@@ -10,8 +10,8 @@ class SerialChannel : public ICommChannel
 	void SendData(const uint8_t* data, size_t size) override;
 	bool ReceiveData(uint8_t& data) override;
 
-	void TestEcho(); // <-- ADAUG? ACEAST? LINIE
+	void TestEcho(); 
 
 	private:
-	// UartDriver uart_driver_; // Aceasta este goal? de când am trecut la Singleton
+	
 };

@@ -13,5 +13,4 @@
 
 #define HTTP_REQUEST_BUFFER_SIZE 128
 
-// Constanta pentru num?rul maxim de handlere (ex: Gpio, Timer, Adc)
 #define MAX_HANDLERS 5

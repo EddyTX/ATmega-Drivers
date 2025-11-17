@@ -19,7 +19,7 @@ enum PinLevel : uint8_t
 class GpioDriver
 {
 	public:
-	// --- Singleton Accessor ---
+	
 	static GpioDriver& GetInstance()
 	{
 		static GpioDriver instance;
@@ -32,11 +32,11 @@ class GpioDriver
 	PinLevel ReadPin(volatile uint8_t *pinReg, uint8_t pin);
 	
 	private:
-	// --- Singleton (private) ---
+	
 	GpioDriver() {}
 	~GpioDriver() {}
 	GpioDriver(const GpioDriver&) = delete;
 	GpioDriver& operator=(const GpioDriver&) = delete;
 };
 
-#endif /* ATMEGADRIVERS_GPIO_HPP_INCLUDED */
+#endif 

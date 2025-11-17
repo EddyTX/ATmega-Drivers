@@ -2,7 +2,7 @@
 
 #include "iendpoint_handler.hpp"
 #include "icomm_channel.hpp"
-#include "gpio.hpp" // Pentru GpioDriver Singleton
+#include "gpio.hpp" 
 
 class GpioHandler : public IEndpointHandler
 {
@@ -15,5 +15,5 @@ class GpioHandler : public IEndpointHandler
 	void SendOK();
 
 	ICommChannel& comm_;
-	GpioDriver& gpio_; // O referin?? la Singleton
+	GpioDriver& gpio_; 
 };

@@ -1,6 +1,5 @@
 #include "../include/serial_channel.hpp"
 
-// Implementarea Singleton: Folosim UartDriver::GetInstance()
 
 void SerialChannel::Init(uint32_t baud)
 {
@@ -26,11 +25,11 @@ bool SerialChannel::ReceiveData(uint8_t& data)
 	return false;
 }
 
-// --- Func?ia de test (NOU?) ---
+
 void SerialChannel::TestEcho()
 {
 	uint8_t data;
-	// Folose?te propriile sale metode (ReceiveData ?i SendData)
+	
 	if(this->ReceiveData(data))
 	{
 		this->SendData(&data, 1);

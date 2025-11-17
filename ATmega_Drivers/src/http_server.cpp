@@ -1,15 +1,14 @@
 #include "../include/http_server.hpp"
 #include <string.h>
 #include <stdio.h>
-#include <stdlib.h> // Pentru strtok
+#include <stdlib.h> 
 
-// Constructorul, acum mult mai simplu
+
 HttpServer::HttpServer(ICommChannel& comm)
 : comm_(comm), handlerCount_(0)
 {
 }
 
-// Metoda de a ad?uga un handler în list?
 bool HttpServer::RegisterHandler(IEndpointHandler* handler)
 {
 	if (handlerCount_ < MAX_HANDLERS)
@@ -20,7 +19,6 @@ bool HttpServer::RegisterHandler(IEndpointHandler* handler)
 	return false;
 }
 
-// Process() r?mâne la fel ca înainte (cite?te datele de pe serial?)
 void HttpServer::Process()
 {
 	static char buffer[HTTP_REQUEST_BUFFER_SIZE];
@@ -34,7 +32,7 @@ void HttpServer::Process()
 		if(c == '\n' || index >= sizeof(buffer) - 1)
 		{
 			buffer[index] = 0;
-			HandleRequest(buffer); // Trimitem buffer-ul (non-const)
+			HandleRequest(buffer); 
 			index = 0;
 		}
 		else if(c != '\r')
@@ -44,11 +42,10 @@ void HttpServer::Process()
 	}
 }
 
-// --- Func?iile ajut?toare pentru r?spunsuri ---
 
 void HttpServer::SendResponse(const char* code, const char* contentType, const char* body)
 {
-	char response[128]; // Buffer temporar pentru headere
+	char response[128]; 
 	int bodyLen = strlen(body);
 
 	snprintf(response, sizeof(response),
@@ -59,7 +56,7 @@ void HttpServer::SendResponse(const char* code, const char* contentType, const c
 
 	comm_.SendData((const uint8_t*)response, strlen(response));
 	comm_.SendData((const uint8_t*)body, bodyLen);
-	comm_.SendData((const uint8_t*)"\r\n", 2); // Final de r?spuns
+	comm_.SendData((const uint8_t*)"\r\n", 2); 
 }
 
 void HttpServer::Send404()
@@ -73,39 +70,36 @@ void HttpServer::Send400()
 }
 
 
-// --- Logica principal? (refactorizat?) ---
 
 void HttpServer::HandleRequest(char* req)
 {
-	// Pasul 1: Pars?m request-ul folosind strtok
+	
 	char* method = strtok(req, " ");
 	char* path = strtok(NULL, " ");
-	char* version = strtok(NULL, " \r\n"); // Elimin?m ?i \r
+	char* version = strtok(NULL, " \r\n"); 
 
-	// Verific?m dac? avem toate cele 3 componente
+	
 	if (method == nullptr || path == nullptr || version == nullptr)
 	{
-		Send400(); // Bad Request
+		Send400(); 
 		return;
 	}
 
-	// Pasul 2: Verific?m versiunea (a?a cum ai cerut)
+	
 	if (strcmp(version, "HTTP/1.1") != 0)
 	{
-		Send400(); // Bad Request
+		Send400(); 
 		return;
 	}
 
-	// Pasul 3: Deleg?m cererea
-	// Întreb?m fiecare handler pe rând
+	
 	for (uint8_t i = 0; i < handlerCount_; i++)
 	{
 		if (handlers_[i]->Handle(method, path))
 		{
-			return; // Handler-ul a gestionat cererea, am terminat
+			return; 
 		}
 	}
 
-	// Dac? am ajuns aici, niciun handler nu a recunoscut calea
 	Send404();
 }

@@ -10,5 +10,5 @@ class TcpChannel : public ICommChannel
 	bool ReceiveData(uint8_t& data) override;
 
 	private:
-	// placeholder TcpDriver tcp_driver_;
+	
 };
