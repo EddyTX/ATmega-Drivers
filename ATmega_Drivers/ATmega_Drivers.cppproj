@@ -165,6 +165,12 @@
     <Compile Include="examples\main.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\adc.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\adc_handler.hpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\gpio.hpp">
       <SubType>compile</SubType>
     </Compile>
@@ -196,6 +202,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="include\uart.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\adc.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\adc_handler.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\gpio.cpp">
