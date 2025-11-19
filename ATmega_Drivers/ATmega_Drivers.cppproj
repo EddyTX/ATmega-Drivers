@@ -189,6 +189,12 @@
     <Compile Include="include\project_defines.hpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="include\pwm.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="include\pwm_handler.hpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="include\serial_channel.hpp">
       <SubType>compile</SubType>
     </Compile>
@@ -217,6 +223,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\operators.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pwm.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pwm_handler.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\serial_channel.cpp">
