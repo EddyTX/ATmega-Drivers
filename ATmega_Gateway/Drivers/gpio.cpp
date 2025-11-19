@@ -1,4 +1,4 @@
-#include "../include/gpio.hpp" 
+#include "gpio.hpp" 
 
 void GpioDriver::SetPinDirection(volatile uint8_t *ddr, uint8_t pin, PinDirection direction)
 {

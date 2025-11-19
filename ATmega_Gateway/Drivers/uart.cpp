@@ -1,5 +1,5 @@
-#include "../include/uart.hpp"
-#include "../include/project_defines.hpp"
+#include "uart.hpp"
+#include "project_defines.hpp"
 #include <avr/interrupt.h>
 
 
@@ -74,15 +74,12 @@ void UartDriver::ReceiveCharISR(uint8_t c)
 
 void UartDriver::SendCharISR()
 {
-	
 	if (txHead == txTail)
 	{
-		
 		UCSR0B &= ~(1 << UDRIE0);
 	}
 	else
 	{
-		
 		char c = txBuffer[txTail];
 		txTail = (txTail + 1) & (UART_TX_BUFFER_SIZE - 1); 
 		

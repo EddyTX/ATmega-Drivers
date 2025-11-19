@@ -1,5 +1,4 @@
-// src/adc.cpp
-#include "../include/adc.hpp"
+#include "adc.hpp"
 
 void AdcDriver::Init()
 {

@@ -1,11 +1,10 @@
+#include <string.h>
+#include <avr/interrupt.h>
 #include "project_defines.hpp"
 #include "serial_channel.hpp"
 #include "http_server.hpp"
 #include "timer.hpp"
 #include "gpio.hpp"
-#include <string.h>
-#include <avr/interrupt.h>
-
 #include "timer_handler.hpp"
 #include "gpio_handler.hpp"
 #include "adc_handler.hpp"

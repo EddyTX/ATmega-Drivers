@@ -1,4 +1,3 @@
-// include/adc.hpp
 #ifndef ATMEGADRIVERS_ADC_HPP_INCLUDED
 #define ATMEGADRIVERS_ADC_HPP_INCLUDED
 

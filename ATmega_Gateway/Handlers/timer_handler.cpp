@@ -1,4 +1,4 @@
-#include "../include/timer_handler.hpp"
+#include "timer_handler.hpp"
 #include <string.h>
 #include <stdio.h>
 

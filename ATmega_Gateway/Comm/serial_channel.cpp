@@ -1,4 +1,4 @@
-#include "../include/serial_channel.hpp"
+#include "serial_channel.hpp"
 
 
 void SerialChannel::Init(uint32_t baud)

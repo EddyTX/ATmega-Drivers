@@ -1,4 +1,4 @@
-#include "../include/adc_handler.hpp"
+#include "adc_handler.hpp"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

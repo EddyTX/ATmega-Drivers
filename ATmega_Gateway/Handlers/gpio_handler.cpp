@@ -1,4 +1,4 @@
-#include "../include/gpio_handler.hpp"
+#include "gpio_handler.hpp"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h> 

@@ -13,11 +13,8 @@ class PwmDriver
 		return instance;
 	}
 
-	// Configureaz? Timer0 pentru Fast PWM pe PD6 (Ch0) ?i PD5 (Ch1)
 	void Init();
 
-	// channel: 0 (PD6) sau 1 (PD5)
-	// duty: 0-255
 	void SetDutyCycle(uint8_t channel, uint8_t duty);
 
 	private:

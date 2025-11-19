@@ -1,5 +1,5 @@
-#include "../include/timer.hpp"
-#include "../include/project_defines.hpp"
+#include "timer.hpp"
+#include "project_defines.hpp"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
